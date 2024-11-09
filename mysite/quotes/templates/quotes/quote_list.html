@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Quotes</title>
+</head>
+
+<body>
+    <h1>All Quotes</h1>
+    <ul>
+        {% for quote in quotes %}
+            <li>"{{ quote.text }}" — <a href="{% url 'author_detail' quote.author.id %}">{{ quote.author.name }}</a></li>
+        {% endfor %}
+    </ul>
+    <a href="/">Back to Home</a>
+</body>
+
+<ul>
+    {% for quote in quotes %}
+        <li>
+            {% if user.is_authenticated %}
+                <a href="{% url 'delete_quote' quote.id %}">Delete</a>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+
+<ul>
+    {% for quote in quotes %}
+        <li>
+            {% if user.is_authenticated %}
+                <a href="{% url 'edit_quote' quote.id %}">Edit</a>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+</html>

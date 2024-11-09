@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+
+<body>
+    <h1>Welcome to the Quotes Website!</h1>
+    <a href="{% url 'register' %}">Register</a> | 
+    <a href="{% url 'add_author' %}">Add Author</a> | 
+    <a href="{% url 'add_quote' %}">Add Quote</a>
+    <title>Authors</title>
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .author-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .author-list li {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        .author-list li h2 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+        .author-list li p {
+            margin: 5px 0;
+        }
+        .author-quotes-count {
+            font-weight: bold;
+            color: #555;
+        }
+        .quote-link {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        .quote-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>List of Authors</h1>
+    <ul class="author-list">
+        {% for author in authors %}
+            <li>
+                <h2>{{ author.name }}</h2>
+                <p>Biography: {{ author.biography }}</p>
+                <p class="author-quotes-count">Quotes: {{ author.quotes.count }}</p>
+                <a class="quote-link" href="{% url 'author_detail' author.id %}">View Quotes by {{ author.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+    
+</body>
+</html>
